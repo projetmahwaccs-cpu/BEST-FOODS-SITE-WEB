@@ -23,3 +23,9 @@ window.addEventListener('load', function() {
     });
   }
 });
+// Fermer le menu après avoir cliqué sur un lien
+document.querySelectorAll('.nav-links a').forEach(function(link) {
+  link.addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.remove('active');
+  });
+});

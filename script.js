@@ -15,6 +15,4 @@ const navLinks = document.querySelector('.nav-links');
 navToggle.addEventListener('click', () => {
   navLinks.classList.toggle('active');
 });
-document.getElementById('navToggle').addEventListener('click', function() {
-  document.querySelector('.nav-links').classList.toggle('active');
-});
+

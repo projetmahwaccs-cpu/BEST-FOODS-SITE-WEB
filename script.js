@@ -16,3 +16,12 @@ navToggle.addEventListener('click', () => {
   navLinks.classList.toggle('active');
 });
 
+window.addEventListener('load', function() {
+  var toggle = document.getElementById('navToggle');
+  var links = document.querySelector('.nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', function() {
+      links.classList.toggle('active');
+    });
+  }
+});

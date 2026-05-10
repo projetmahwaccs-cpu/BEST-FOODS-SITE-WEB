@@ -17,15 +17,18 @@ if (signInButton) {
 window.addEventListener('load', function() {
   var toggle = document.getElementById('navToggle');
   var links = document.querySelector('.nav-links');
+
   if (toggle && links) {
+    // Ouvrir/fermer le menu
     toggle.addEventListener('click', function() {
       links.classList.toggle('active');
     });
+
+    // Fermer le menu après clic sur un lien
+    document.querySelectorAll('.nav-links a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        links.classList.remove('active');
+      });
+    });
   }
-});
-// Fermer le menu après avoir cliqué sur un lien
-document.querySelectorAll('.nav-links a').forEach(function(link) {
-  link.addEventListener('click', function() {
-    document.querySelector('.nav-links').classList.remove('active');
-  });
 });

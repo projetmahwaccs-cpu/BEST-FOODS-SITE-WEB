@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 <style>
 :root{
   --vert:#1a5c2a;--vert2:#2d7a3e;--vert3:#0d3a18;
@@ -313,6 +314,19 @@ footer{background:var(--vert3);color:rgba(255,255,255,0.7);padding:60px 50px 28p
   .modal{max-width:95%;padding:32px;}
   .toast{left:16px;right:16px;bottom:16px;}
   .footer-brand p{max-width:100%;}
+  
+  /* Mobile Premium layout for <768px: 2-column compact grid (Jumia-like) */
+  @media(max-width:768px){
+    .grille-produits{grid-template-columns:repeat(2,1fr);gap:14px;}
+    .carte-produit{padding:8px;}
+    .produit-img-wrap{height:160px;}
+    .produit-info{padding:10px 12px;}
+    .produit-nom{font-size:0.98rem;font-weight:700}
+    .produit-desc{font-size:0.82rem;color:#666}
+    .btn-ajouter{padding:8px 12px;font-size:0.82rem}
+    .hero-content h1{font-size:clamp(1.6rem,6vw,2.4rem);}
+    h2{font-size:1.05rem}
+  }
 }
 
 @media(max-width:640px){
@@ -372,7 +386,7 @@ footer{background:var(--vert3);color:rgba(255,255,255,0.7);padding:60px 50px 28p
   <div class="hero-bg"><span></span><span></span></div>
   <div class="hero-content">
     <div class="hero-badge">⭐ La Qualité au Bon Prix</div>
-    <h1>Les Saveurs <em>Authentiques</em> du Monde</h1>
+    <h1 id="typing">Les Saveurs <em>Authentiques</em> du Monde</h1>
     <p class="hero-sub">Riz, épices, légumineuses et huiles de qualité supérieure — sélectionnés avec soin pour votre cuisine et votre commerce.</p>
     <div class="hero-btns">
       <a href="#produits" class="btn-primary">Découvrir nos produits</a>
@@ -585,7 +599,7 @@ footer{background:var(--vert3);color:rgba(255,255,255,0.7);padding:60px 50px 28p
   }
 </style>
 
-<section id="about">
+<section id="about" data-aos="fade-up" data-aos-delay="140">
   <div class="about-header">
     <h2>À <em>Propos</em> de Nous</h2>
     <p>Découvrez l'histoire et les valeurs qui font de Best Foods Spices votre partenaire de confiance.</p>
@@ -1134,8 +1148,11 @@ let panier=[];
 function catLabel(c){return{riz:'Riz & Céréales',huile:'Huile & Sucre',epices:'Épices',legumes:'Légumineuses'}[c]||c;}
 function afficherProduits(liste){
   const g=document.getElementById('grille');g.innerHTML='';
-  liste.forEach(p=>{
+  liste.forEach((p,idx)=>{
     const d=document.createElement('div');d.className='carte-produit';
+    // AOS attributes for staggered reveal
+    d.setAttribute('data-aos','fade-up');
+    d.setAttribute('data-aos-delay', String(idx * 80));
     
     // Génère soit une vidéo, soit une image, soit un fallback emoji
     let mediaHTML = '';
@@ -1177,24 +1194,30 @@ function ajouterPanier(id){
   updatePanier();showToast(`✅ ${p.nom} ajouté !`);
 }
 function updatePanier(){
-  const total=panier.reduce((s,p)=>s+p.qte,0);
-  document.getElementById('badge').textContent=total;
-  const c=document.getElementById('panierItems');
-  if(!panier.length){c.innerHTML='<div class="panier-vide"><span class="icon">🛒</span><p>Votre panier est vide</p></div>';document.getElementById('totalPrix').textContent='0';return;}
-  c.innerHTML=panier.map(p=>`<div class="item-panier">
-    <img class="item-img" src="${p.img}" alt="${p.nom}" onerror="this.style.display='none'">
-    <div class="item-info">
-      <div class="item-nom">${p.nom}</div>
-      <div class="item-prix">Sur devis</div>
-      <div class="item-qte">
-        <button class="qte-btn" onclick="chgQte(${p.id},-1)">−</button>
-        <span class="qte-val">${p.qte}</span>
-        <button class="qte-btn" onclick="chgQte(${p.id},1)">+</button>
+  const total = panier.reduce((s,p) => s + p.qte, 0);
+  document.getElementById('badge').textContent = total;
+  const c = document.getElementById('panierItems');
+  if(!panier.length){
+    c.innerHTML = '<div class="panier-vide"><span class="icon">🛒</span><p>Votre panier est vide</p></div>';
+    document.getElementById('totalPrix').textContent = '0';
+    return;
+  }
+  c.innerHTML = panier.map(p => `
+    <div class="item-panier">
+      <img class="item-img" src="${p.img}" alt="${p.nom}" onerror="this.style.display='none'">
+      <div class="item-info">
+        <div class="item-nom">${p.nom}</div>
+        <div class="item-prix">Sur devis</div>
+        <div class="item-qte">
+          <button class="qte-btn" onclick="chgQte(${p.id}, -1)">−</button>
+          <span class="qte-val">${p.qte}</span>
+          <button class="qte-btn" onclick="chgQte(${p.id}, 1)">+</button>
+        </div>
       </div>
+      <button class="suppr-btn" onclick="supprimerItem(${p.id})">🗑</button>
     </div>
-    <button class="suppr-btn" onclick="supprimerItem(${p.id})">🗑</button>
-  </div>`).join('');
-  document.getElementById('totalPrix').textContent=total+' article'+(total>1?'s':'');
+  `).join('');
+  document.getElementById('totalPrix').textContent = total + ' article' + (total > 1 ? 's' : '');
 }
 function chgQte(id,d){const i=panier.find(p=>p.id===id);if(!i)return;i.qte+=d;if(i.qte<=0)panier=panier.filter(p=>p.id!==id);updatePanier();}
 function supprimerItem(id){panier=panier.filter(p=>p.id!==id);updatePanier();showToast('🗑️ Article retiré');}
@@ -1214,6 +1237,39 @@ function fermerSiDehors(e){if(e.target===document.getElementById('panierOverlay'
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);}
 function envoyerMessage(){showToast('✅ Message envoyé ! Nous vous répondons bientôt.');}
 afficherProduits(produits);
+</script>
+
+<!-- AOS and small enhancements -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  if(window.AOS) AOS.init({once:true,duration:640,easing:'ease-out-cubic'});
+  // Typing effect for hero h1
+  const h = document.getElementById('typing');
+  if(h){
+    const parts = ['Les Saveurs ', 'Authentiques', ' du Monde'];
+    h.innerHTML = '';
+    let pIndex = 0, cIndex = 0;
+    function typeNext(){
+      if(pIndex >= parts.length) return;
+      const part = parts[pIndex];
+      if(cIndex < part.length){
+        const ch = part[cIndex++];
+        if(pIndex === 1){
+          let em = h.querySelector('em');
+          if(!em){ em = document.createElement('em'); h.appendChild(em); }
+          em.innerHTML += ch;
+        } else {
+          let span = h.querySelector('.plain');
+          if(!span){ span = document.createElement('span'); span.className='plain'; h.insertBefore(span, h.firstChild); }
+          span.innerHTML += ch;
+        }
+        setTimeout(typeNext, 45 + Math.random()*30);
+      } else { pIndex++; cIndex = 0; setTimeout(typeNext, 90); }
+    }
+    typeNext();
+  }
+});
 </script>
 <script src="script.js"></script>
 </body>

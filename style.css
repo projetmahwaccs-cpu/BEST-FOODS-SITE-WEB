@@ -75,3 +75,11 @@
     color: var(--gold-light);
   }
 }
+
+/* Additional mobile tweaks for boutique */
+@media (max-width: 768px) {
+  h1{font-size:1.8rem}
+  h2{font-size:1.05rem}
+  .carte-produit .produit-img-wrap img,
+  .carte-produit .produit-img-wrap video{object-fit:cover;width:100%;height:100%;display:block}
+}

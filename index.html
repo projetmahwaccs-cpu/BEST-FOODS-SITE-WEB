@@ -517,8 +517,26 @@ footer{
     <span>Découvrir</span>
     <div class="scroll-arrow"></div>
   </div>
+   <canvas id="wave-canvas"></canvas>
 </section>
 
+  <style>
+    .hero {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* ou la hauteur que tu veux */
+  overflow: hidden;
+}
+
+#wave-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* derrière le contenu */
+}
+</style>
 <!-- BAND -->
 <div class="band">
   <div class="band-item">

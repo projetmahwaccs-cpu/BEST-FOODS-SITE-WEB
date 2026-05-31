@@ -99,55 +99,36 @@ body{font-family:'Nunito',sans-serif;color:var(--texte);background:var(--blanc);
 /* =========================================
    NAV
    ========================================= */
-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 50px;
-  height: 72px;
-  box-shadow: 0 3px 24px rgba(0,0,0,0.25);
-  overflow: hidden;
-  background: var(--vert);
+nav{position:fixed;top:0;width:100%;z-index:1000;background:var(--vert);display:flex;align-items:center;justify-content:space-between;padding:0 50px;height:72px;box-shadow:0 3px 24px rgba(0,0,0,0.25);}
+.logo-nav{display:flex;align-items:center;gap:13px;text-decoration:none;}
+.logo-nav-wrap{position:relative;}
+.logo-nav-wrap img{
+  height:52px;border-radius:50%;border:2px solid var(--orange);
+  box-shadow:0 0 16px rgba(232,130,26,0.4);display:block;
+  animation:navLogoLand 0.9s cubic-bezier(0.34,1.56,0.64,1) both;
+  animation-delay:4.5s;transform:scale(0) rotate(-180deg);
 }
-
-/* Vague orange dans la navbar */
-nav::before,
-nav::after {
-  content: '';
-  position: absolute;
-  bottom: -20px;
-  left: -50%;
-  width: 200%;
-  height: 100%;
-  border-radius: 43% 47% 44% 48% / 37% 29% 43% 27%;
-  pointer-events: none;
-  z-index: 0;
+@keyframes navLogoLand{
+  0%{transform:scale(0) rotate(-180deg);}
+  60%{transform:scale(1.2) rotate(12deg);}
+  80%{transform:scale(0.93) rotate(-4deg);}
+  100%{transform:scale(1) rotate(0deg);}
 }
-
-nav::before {
-  background: rgba(232, 130, 26, 0.18);
-  animation: navWave1 7s linear infinite;
+.logo-nav-wrap::after{
+  content:'';position:absolute;inset:-5px;border-radius:50%;
+  border:2px solid var(--orange);opacity:0;
+  animation:navHalo 2s ease-out infinite;animation-delay:5.5s;
 }
-
-nav::after {
-  background: rgba(232, 130, 26, 0.10);
-  animation: navWave2 10s linear infinite reverse;
-  bottom: -30px;
-}
-
-@keyframes navWave1 {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes navWave2 {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+@keyframes navHalo{0%{transform:scale(1);opacity:0.8;}100%{transform:scale(1.7);opacity:0;}}
+.logo-nav .brand{display:flex;flex-direction:column;line-height:1.1;}
+.logo-nav .brand span{color:var(--blanc);font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;}
+.logo-nav .brand small{color:var(--orange2);font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;}
+.nav-links{display:flex;gap:30px;list-style:none;}
+.nav-links a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:0.85rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;transition:color 0.2s;padding-bottom:3px;border-bottom:2px solid transparent;}
+.nav-links a:hover{color:var(--orange2);border-bottom-color:var(--orange2);}
+.panier-btn{background:var(--orange);color:var(--blanc);border:none;padding:11px 22px;border-radius:30px;cursor:pointer;font-weight:800;font-size:0.85rem;letter-spacing:1px;display:flex;align-items:center;gap:9px;font-family:'Nunito',sans-serif;transition:all 0.2s;box-shadow:0 4px 16px rgba(232,130,26,0.35);}
+.panier-btn:hover{background:var(--orange2);transform:scale(1.04);}
+.badge{background:var(--blanc);color:var(--vert);border-radius:50%;width:22px;height:22px;font-size:0.75rem;font-weight:900;display:flex;align-items:center;justify-content:center;}
 /* HERO */
 #accueil{min-height:100vh;background:linear-gradient(135deg,var(--vert3) 0%,var(--vert) 55%,#1f6b33 100%);display:flex;align-items:center;padding:100px 60px 60px;position:relative;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;pointer-events:none;}

@@ -385,73 +385,100 @@ footer{background:var(--vert3);color:rgba(255,255,255,0.7);padding:60px 50px 28p
   <div class="grille-produits" id="grille"></div>
 </section>
 
-  <!-- ===== SECTION PRODUITS EN ACTION ===== -->
-<section style="background:white; margin-top:8px; padding-bottom:8px;">
-  <div style="display:flex; align-items:center; justify-content:space-between; padding:13px 14px 4px;">
+ <!-- ===== SECTION PRODUITS EN ACTION + VAGUE ===== -->
+<section id="produits-action" style="background:white; margin-top:8px; padding-bottom:8px; position:relative; overflow:hidden;">
+
+  <!-- CANVAS VAGUE DERRIÈRE -->
+  <canvas id="reelCanvas" style="position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none;"></canvas>
+
+  <!-- TITRE -->
+  <div style="position:relative; z-index:1; display:flex; align-items:center; justify-content:space-between; padding:13px 14px 4px;">
     <div style="display:flex; align-items:center; gap:8px;">
       <div style="width:3px; height:18px; background:linear-gradient(180deg,#0B5D33,#49D17C); border-radius:2px;"></div>
       <div>
-        <div style="font-size:15px; font-weight:800; color:#071a0e;">Produits en <span style="background:linear-gradient(135deg,#0B5D33,#2e9150); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Action 🎬</span></div>
+        <div style="font-size:15px; font-weight:800; color:#071a0e;">
+          Produits en <span style="background:linear-gradient(135deg,#0B5D33,#2e9150); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Action 🎬</span>
+        </div>
         <div style="font-size:10px; color:#6b9c78;">Tap pour lancer · Glissez pour voir plus</div>
       </div>
     </div>
   </div>
 
-  <div style="display:flex; gap:12px; overflow-x:auto; padding:0 0 12px 14px; scrollbar-width:none; -webkit-overflow-scrolling:touch;">
+  <!-- CARTES VIDÉO -->
+  <div style="position:relative; z-index:1; display:flex; gap:12px; overflow-x:auto; padding:8px 0 12px 14px; scrollbar-width:none; -webkit-overflow-scrolling:touch;">
 
     <!-- CARTE 1 -->
-    <div class="vr-card" onclick="reelToggle(this)" style="flex-shrink:0; width:155px; border-radius:12px; overflow:hidden; cursor:pointer; position:relative; background:#041209;">
-      <div class="vr-inner" style="position:relative; width:100%; aspect-ratio:9/16; background:linear-gradient(135deg,#0a2010,#1a4a2e); border-radius:12px; overflow:hidden;">
-        <video class="vr-video" src="eplucheuse.mp4" muted loop playsinline preload="none" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
-        <div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0.06) 0%,transparent 35%,transparent 50%,rgba(0,0,0,0.78) 100%); z-index:2; pointer-events:none;"></div>
-        <span style="position:absolute; top:9px; left:9px; z-index:4; padding:3px 9px; font-size:8px; font-weight:800; letter-spacing:1px; text-transform:uppercase; border-radius:3px; color:white; background:#0B5D33;">Nouveau</span>
-        <button onclick="event.stopPropagation(); reelMute(this)" style="position:absolute; top:9px; right:9px; z-index:4; background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.2); border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; color:white; font-size:13px; cursor:pointer;">🔇</button>
-        <div class="vr-play" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:3; transition:opacity 0.25s;">
-          <div style="width:44px; height:44px; background:rgba(255,255,255,0.2); border-radius:50%; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px); border:2px solid rgba(255,255,255,0.4); padding-left:4px; font-size:18px;">▶</div>
+    <div class="vr-card" onclick="reelToggle(this)" style="flex-shrink:0;width:155px;border-radius:12px;overflow:hidden;cursor:pointer;position:relative;background:#041209;">
+      <div style="position:relative;width:100%;aspect-ratio:9/16;background:linear-gradient(135deg,#0a2010,#1a4a2e);border-radius:12px;overflow:hidden;">
+        <video class="vr-video" src="eplucheuse.mp4" muted loop playsinline preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></video>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.06) 0%,transparent 35%,transparent 50%,rgba(0,0,0,.78) 100%);z-index:2;pointer-events:none;"></div>
+        <span style="position:absolute;top:9px;left:9px;z-index:4;padding:3px 9px;font-size:8px;font-weight:800;letter-spacing:1px;text-transform:uppercase;border-radius:3px;color:white;background:#0B5D33;">Nouveau</span>
+        <button onclick="event.stopPropagation();reelMute(this)" style="position:absolute;top:9px;right:9px;z-index:4;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.2);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:white;font-size:13px;cursor:pointer;">🔇</button>
+        <div class="vr-play" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:3;transition:opacity .25s;">
+          <div style="width:44px;height:44px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,.4);padding-left:4px;font-size:18px;">▶</div>
         </div>
-        <div style="position:absolute; bottom:0; left:0; right:0; height:2px; background:rgba(255,255,255,0.2); z-index:5;"><div class="vr-prog-bar" style="height:100%; background:linear-gradient(90deg,#49D17C,#f2d57a); width:0%; transition:width 0.1s linear;"></div></div>
-        <div style="position:absolute; bottom:0; left:0; right:0; z-index:4; padding:10px 10px 12px;">
-          <div style="font-size:11px; font-weight:700; color:white; line-height:1.3; margin-bottom:4px; text-shadow:0 1px 4px rgba(0,0,0,0.5);">Éplucheuse Électrique PRO</div>
-          <div style="font-size:13px; font-weight:800; color:#f2d57a; margin-bottom:7px;">1 100 FCFA</div>
-          <button onclick="event.stopPropagation();" style="width:100%; background:rgba(11,93,51,0.9); border:1px solid rgba(73,209,124,0.4); color:white; padding:7px; font-size:10px; font-weight:700; text-transform:uppercase; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:5px; border-radius:6px;">🛒 Ajouter</button>
+        <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(255,255,255,.2);z-index:5;"><div class="vr-prog-bar" style="height:100%;background:linear-gradient(90deg,#49D17C,#f2d57a);width:0%;transition:width .1s linear;"></div></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;z-index:4;padding:10px 10px 12px;">
+          <div style="font-size:11px;font-weight:700;color:white;line-height:1.3;margin-bottom:4px;text-shadow:0 1px 4px rgba(0,0,0,.5);">Éplucheuse Électrique PRO</div>
+          <div style="font-size:13px;font-weight:800;color:#f2d57a;margin-bottom:7px;">1 100 FCFA</div>
+          <button onclick="event.stopPropagation();" style="width:100%;background:rgba(11,93,51,.9);border:1px solid rgba(73,209,124,.4);color:white;padding:7px;font-size:10px;font-weight:700;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;border-radius:6px;">🛒 Ajouter</button>
         </div>
       </div>
     </div>
 
     <!-- CARTE 2 -->
-    <div class="vr-card" onclick="reelToggle(this)" style="flex-shrink:0; width:155px; border-radius:12px; overflow:hidden; cursor:pointer; position:relative; background:#041209;">
-      <div class="vr-inner" style="position:relative; width:100%; aspect-ratio:9/16; background:linear-gradient(135deg,#0a2010,#1a4a2e); border-radius:12px; overflow:hidden;">
-        <video class="vr-video" src="mixeur-mini.mp4" muted loop playsinline preload="none" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
-        <div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0.06) 0%,transparent 35%,transparent 50%,rgba(0,0,0,0.78) 100%); z-index:2; pointer-events:none;"></div>
-        <span style="position:absolute; top:9px; left:9px; z-index:4; padding:3px 9px; font-size:8px; font-weight:800; letter-spacing:1px; text-transform:uppercase; border-radius:3px; color:white; background:#b8911a;">Promo</span>
-        <button onclick="event.stopPropagation(); reelMute(this)" style="position:absolute; top:9px; right:9px; z-index:4; background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.2); border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; color:white; font-size:13px; cursor:pointer;">🔇</button>
-        <div class="vr-play" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:3; transition:opacity 0.25s;">
-          <div style="width:44px; height:44px; background:rgba(255,255,255,0.2); border-radius:50%; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px); border:2px solid rgba(255,255,255,0.4); padding-left:4px; font-size:18px;">▶</div>
+    <div class="vr-card" onclick="reelToggle(this)" style="flex-shrink:0;width:155px;border-radius:12px;overflow:hidden;cursor:pointer;position:relative;background:#041209;">
+      <div style="position:relative;width:100%;aspect-ratio:9/16;background:linear-gradient(135deg,#0a2010,#1a4a2e);border-radius:12px;overflow:hidden;">
+        <video class="vr-video" src="mixeur-mini.mp4" muted loop playsinline preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></video>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.06) 0%,transparent 35%,transparent 50%,rgba(0,0,0,.78) 100%);z-index:2;pointer-events:none;"></div>
+        <span style="position:absolute;top:9px;left:9px;z-index:4;padding:3px 9px;font-size:8px;font-weight:800;letter-spacing:1px;text-transform:uppercase;border-radius:3px;color:white;background:#b8911a;">Promo</span>
+        <button onclick="event.stopPropagation();reelMute(this)" style="position:absolute;top:9px;right:9px;z-index:4;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.2);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:white;font-size:13px;cursor:pointer;">🔇</button>
+        <div class="vr-play" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:3;transition:opacity .25s;">
+          <div style="width:44px;height:44px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,.4);padding-left:4px;font-size:18px;">▶</div>
         </div>
-        <div style="position:absolute; bottom:0; left:0; right:0; height:2px; background:rgba(255,255,255,0.2); z-index:5;"><div class="vr-prog-bar" style="height:100%; background:linear-gradient(90deg,#49D17C,#f2d57a); width:0%; transition:width 0.1s linear;"></div></div>
-        <div style="position:absolute; bottom:0; left:0; right:0; z-index:4; padding:10px 10px 12px;">
-          <div style="font-size:11px; font-weight:700; color:white; line-height:1.3; margin-bottom:4px; text-shadow:0 1px 4px rgba(0,0,0,0.5);">Mixeur Mini Portable</div>
-          <div style="font-size:13px; font-weight:800; color:#f2d57a; margin-bottom:7px;">1 750 FCFA</div>
-          <button onclick="event.stopPropagation();" style="width:100%; background:rgba(11,93,51,0.9); border:1px solid rgba(73,209,124,0.4); color:white; padding:7px; font-size:10px; font-weight:700; text-transform:uppercase; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:5px; border-radius:6px;">🛒 Ajouter</button>
+        <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(255,255,255,.2);z-index:5;"><div class="vr-prog-bar" style="height:100%;background:linear-gradient(90deg,#49D17C,#f2d57a);width:0%;transition:width .1s linear;"></div></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;z-index:4;padding:10px 10px 12px;">
+          <div style="font-size:11px;font-weight:700;color:white;line-height:1.3;margin-bottom:4px;text-shadow:0 1px 4px rgba(0,0,0,.5);">Mixeur Mini Portable</div>
+          <div style="font-size:13px;font-weight:800;color:#f2d57a;margin-bottom:7px;">1 750 FCFA</div>
+          <button onclick="event.stopPropagation();" style="width:100%;background:rgba(11,93,51,.9);border:1px solid rgba(73,209,124,.4);color:white;padding:7px;font-size:10px;font-weight:700;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;border-radius:6px;">🛒 Ajouter</button>
         </div>
       </div>
     </div>
 
     <!-- CARTE 3 -->
-    <div class="vr-card" onclick="reelToggle(this)" style="flex-shrink:0; width:155px; border-radius:12px; overflow:hidden; cursor:pointer; position:relative; background:#041209;">
-      <div class="vr-inner" style="position:relative; width:100%; aspect-ratio:9/16; background:linear-gradient(135deg,#0a2010,#1a4a2e); border-radius:12px; overflow:hidden;">
-        <video class="vr-video" src="oipiment360rotation.mp4" muted loop playsinline preload="none" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
-        <div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0.06) 0%,transparent 35%,transparent 50%,rgba(0,0,0,0.78) 100%); z-index:2; pointer-events:none;"></div>
-        <span style="position:absolute; top:9px; left:9px; z-index:4; padding:3px 9px; font-size:8px; font-weight:800; letter-spacing:1px; text-transform:uppercase; border-radius:3px; color:white; background:#0B5D33;">Nouveau</span>
-        <button onclick="event.stopPropagation(); reelMute(this)" style="position:absolute; top:9px; right:9px; z-index:4; background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.2); border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; color:white; font-size:13px; cursor:pointer;">🔇</button>
-        <div class="vr-play" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:3; transition:opacity 0.25s;">
-          <div style="width:44px; height:44px; background:rgba(255,255,255,0.2); border-radius:50%; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px); border:2px solid rgba(255,255,255,0.4); padding-left:4px; font-size:18px;">▶</div>
+    <div class="vr-card" onclick="reelToggle(this)" style="flex-shrink:0;width:155px;border-radius:12px;overflow:hidden;cursor:pointer;position:relative;background:#041209;">
+      <div style="position:relative;width:100%;aspect-ratio:9/16;background:linear-gradient(135deg,#0a2010,#1a4a2e);border-radius:12px;overflow:hidden;">
+        <video class="vr-video" src="ferme-sachet.mp4" muted loop playsinline preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></video>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.06) 0%,transparent 35%,transparent 50%,rgba(0,0,0,.78) 100%);z-index:2;pointer-events:none;"></div>
+        <span style="position:absolute;top:9px;left:9px;z-index:4;padding:3px 9px;font-size:8px;font-weight:800;letter-spacing:1px;text-transform:uppercase;border-radius:3px;color:white;background:#0B5D33;">Nouveau</span>
+        <button onclick="event.stopPropagation();reelMute(this)" style="position:absolute;top:9px;right:9px;z-index:4;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.2);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:white;font-size:13px;cursor:pointer;">🔇</button>
+        <div class="vr-play" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:3;transition:opacity .25s;">
+          <div style="width:44px;height:44px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,.4);padding-left:4px;font-size:18px;">▶</div>
         </div>
-        <div style="position:absolute; bottom:0; left:0; right:0; height:2px; background:rgba(255,255,255,0.2); z-index:5;"><div class="vr-prog-bar" style="height:100%; background:linear-gradient(90deg,#49D17C,#f2d57a); width:0%; transition:width 0.1s linear;"></div></div>
-        <div style="position:absolute; bottom:0; left:0; right:0; z-index:4; padding:10px 10px 12px;">
-          <div style="font-size:11px; font-weight:700; color:white; line-height:1.3; margin-bottom:4px; text-shadow:0 1px 4px rgba(0,0,0,0.5);">Ferme-Sachet Automatique</div>
-          <div style="font-size:13px; font-weight:800; color:#f2d57a; margin-bottom:7px;">2 800 FCFA</div>
-          <button onclick="event.stopPropagation();" style="width:100%; background:rgba(11,93,51,0.9); border:1px solid rgba(73,209,124,0.4); color:white; padding:7px; font-size:10px; font-weight:700; text-transform:uppercase; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:5px; border-radius:6px;">🛒 Ajouter</button>
+        <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(255,255,255,.2);z-index:5;"><div class="vr-prog-bar" style="height:100%;background:linear-gradient(90deg,#49D17C,#f2d57a);width:0%;transition:width .1s linear;"></div></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;z-index:4;padding:10px 10px 12px;">
+          <div style="font-size:11px;font-weight:700;color:white;line-height:1.3;margin-bottom:4px;text-shadow:0 1px 4px rgba(0,0,0,.5);">Ferme-Sachet Automatique</div>
+          <div style="font-size:13px;font-weight:800;color:#f2d57a;margin-bottom:7px;">2 800 FCFA</div>
+          <button onclick="event.stopPropagation();" style="width:100%;background:rgba(11,93,51,.9);border:1px solid rgba(73,209,124,.4);color:white;padding:7px;font-size:10px;font-weight:700;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;border-radius:6px;">🛒 Ajouter</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARTE 4 -->
+    <div class="vr-card" onclick="reelToggle(this)" style="flex-shrink:0;width:155px;border-radius:12px;overflow:hidden;cursor:pointer;position:relative;background:#041209;">
+      <div style="position:relative;width:100%;aspect-ratio:9/16;background:linear-gradient(135deg,#0a2010,#1a4a2e);border-radius:12px;overflow:hidden;">
+        <video class="vr-video" src="mousticaire.mp4" muted loop playsinline preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></video>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.06) 0%,transparent 35%,transparent 50%,rgba(0,0,0,.78) 100%);z-index:2;pointer-events:none;"></div>
+        <span style="position:absolute;top:9px;left:9px;z-index:4;padding:3px 9px;font-size:8px;font-weight:800;letter-spacing:1px;text-transform:uppercase;border-radius:3px;color:white;background:#0B5D33;">Nouveau</span>
+        <button onclick="event.stopPropagation();reelMute(this)" style="position:absolute;top:9px;right:9px;z-index:4;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.2);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:white;font-size:13px;cursor:pointer;">🔇</button>
+        <div class="vr-play" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:3;transition:opacity .25s;">
+          <div style="width:44px;height:44px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,.4);padding-left:4px;font-size:18px;">▶</div>
+        </div>
+        <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(255,255,255,.2);z-index:5;"><div class="vr-prog-bar" style="height:100%;background:linear-gradient(90deg,#49D17C,#f2d57a);width:0%;transition:width .1s linear;"></div></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;z-index:4;padding:10px 10px 12px;">
+          <div style="font-size:11px;font-weight:700;color:white;line-height:1.3;margin-bottom:4px;text-shadow:0 1px 4px rgba(0,0,0,.5);">Moustiquaire Électrique</div>
+          <div style="font-size:13px;font-weight:800;color:#f2d57a;margin-bottom:7px;">2 400 FCFA</div>
+          <button onclick="event.stopPropagation();" style="width:100%;background:rgba(11,93,51,.9);border:1px solid rgba(73,209,124,.4);color:white;padding:7px;font-size:10px;font-weight:700;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;border-radius:6px;">🛒 Ajouter</button>
         </div>
       </div>
     </div>
@@ -460,48 +487,141 @@ footer{background:var(--vert3);color:rgba(255,255,255,0.7);padding:60px 50px 28p
 </section>
 
 <script>
-function reelToggle(card) {
+/* ══ VAGUE CANVAS INTERACTIVE ══ */
+(function(){
+  const sec    = document.getElementById('produits-action');
+  const canvas = document.getElementById('reelCanvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H, mouseX, mouseY, smoothX, smoothY, t = 0;
+
+  function resize(){
+    W = canvas.width  = sec.offsetWidth;
+    H = canvas.height = sec.offsetHeight;
+    mouseX = smoothX = W / 2;
+    mouseY = smoothY = H / 2;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  sec.addEventListener('mousemove', function(e){
+    const r = sec.getBoundingClientRect();
+    mouseX = e.clientX - r.left;
+    mouseY = e.clientY - r.top;
+  });
+
+  /* Calcul d'une ligne de vague */
+  function waveY(x, time, layer){
+    const base = H * (0.45 + layer * 0.08);
+    const a1   = 40 - layer * 5;
+    const a2   = 22 - layer * 3;
+    const dx   = x - smoothX;
+    const dy   = smoothY - base;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    const pull = Math.max(0, 1 - dist / (W * 0.45));
+    return base
+      + Math.sin(x * (0.009 + layer*0.002) + time*(0.55 + layer*0.1)) * a1
+      + Math.sin(x * (0.015 + layer*0.001) - time*(0.38 + layer*0.08) + layer) * a2
+      + pull * dy * 0.3;
+  }
+
+  function drawLayer(layer){
+    const alpha = 0.08 + layer * 0.05;
+    /* couleurs Best Foods : vert + touche orange */
+    const hue   = layer < 3 ? 140 + layer*8 : 32;
+    ctx.beginPath();
+    ctx.moveTo(0, H);
+    for(let i = 0; i <= 80; i++){
+      const x = (i/80)*W;
+      ctx.lineTo(x, waveY(x, t, layer));
+    }
+    ctx.lineTo(W, H);
+    ctx.closePath();
+    const g = ctx.createLinearGradient(0, H*0.1, 0, H);
+    g.addColorStop(0, `hsla(${hue},70%,38%,${alpha+0.06})`);
+    g.addColorStop(1, `hsla(${hue},60%,22%,${alpha})`);
+    ctx.fillStyle = g;
+    ctx.fill();
+  }
+
+  function loop(){
+    t += 0.011;
+    smoothX += (mouseX - smoothX) * 0.05;
+    smoothY += (mouseY - smoothY) * 0.05;
+
+    ctx.clearRect(0, 0, W, H);
+
+    /* fond dégradé sombre */
+    const bg = ctx.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0, '#071a0e');
+    bg.addColorStop(1, '#0d2a14');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    /* glow souris */
+    const gx  = smoothX;
+    const gy  = waveY(smoothX, t, 2);
+    const grd = ctx.createRadialGradient(gx, gy, 0, gx, gy, 160);
+    grd.addColorStop(0, 'rgba(232,130,26,0.14)');
+    grd.addColorStop(1, 'rgba(232,130,26,0)');
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, W, H);
+
+    /* 5 couches de vagues */
+    for(let l = 4; l >= 0; l--) drawLayer(l);
+
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+/* ══ LECTURE / PAUSE ══ */
+function reelToggle(card){
   const vid = card.querySelector('.vr-video');
-  if (!vid) return;
-  if (vid.paused) {
-    vid.play().then(() => card.classList.add('playing')).catch(() => {});
+  if(!vid) return;
+  if(vid.paused){
+    vid.play().then(()=>card.classList.add('playing')).catch(()=>{});
   } else {
     vid.pause();
     card.classList.remove('playing');
   }
 }
-function reelMute(btn) {
+
+/* ══ MUTE ══ */
+function reelMute(btn){
   const vid = btn.closest('.vr-card').querySelector('.vr-video');
-  if (!vid) return;
+  if(!vid) return;
   vid.muted = !vid.muted;
   btn.textContent = vid.muted ? '🔇' : '🔊';
 }
-document.querySelectorAll('.vr-card').forEach(card => {
+
+/* ══ PROGRESSION ══ */
+document.querySelectorAll('.vr-card').forEach(card=>{
   const vid = card.querySelector('.vr-video');
   const bar = card.querySelector('.vr-prog-bar');
-  if (!vid || !bar) return;
-  vid.addEventListener('timeupdate', () => {
-    if (vid.duration) bar.style.width = (vid.currentTime / vid.duration * 100) + '%';
+  if(!vid||!bar) return;
+  vid.addEventListener('timeupdate',()=>{
+    if(vid.duration) bar.style.width=(vid.currentTime/vid.duration*100)+'%';
   });
 });
-if ('IntersectionObserver' in window) {
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      const vid = entry.target.querySelector('.vr-video');
-      if (!vid) return;
-      if (entry.isIntersecting) {
-        vid.play().then(() => entry.target.classList.add('playing')).catch(() => {});
+
+/* ══ AUTOPLAY INTERSECTION ══ */
+if('IntersectionObserver' in window){
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      const vid = e.target.querySelector('.vr-video');
+      if(!vid) return;
+      if(e.isIntersecting){
+        vid.play().then(()=>e.target.classList.add('playing')).catch(()=>{});
       } else {
         vid.pause();
-        entry.target.classList.remove('playing');
+        e.target.classList.remove('playing');
       }
     });
-  }, { threshold: 0.65 });
-  document.querySelectorAll('.vr-card').forEach(c => obs.observe(c));
+  },{threshold:0.65});
+  document.querySelectorAll('.vr-card').forEach(c=>obs.observe(c));
 }
 </script>
-
-<!-- À PROPOS -->
+<!-- ===== FIN SECTION PRODUITS EN ACTION ===== -->
   
 <!-- À PROPOS -->
 <!-- ===== SECTION À PROPOS BEST FOODS — VIDÉO EN BOUCLE ===== -->

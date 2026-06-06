@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BEST FOODS — La Qualité au Bon Prix · Import · Export · Négoce</title>
+<meta name="description" content="Best Foods, import-export de produits alimentaires et d'épices basé à Dakar, Sénégal. La Qualité au Bon Prix.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --vert-900:#0C2E16; --vert-800:#103D1D; --vert-600:#1A5C2A; --vert-500:#22773A;
+    --or:#D4A017; --or-clair:#F0C04A; --orange:#E8991C;
+    --creme:#FAF7EF; --creme-2:#F3EEE1; --encre:#16261A;
+    --rad:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Poppins',sans-serif; color:var(--encre); background:var(--creme);
+    overflow-x:hidden; line-height:1.65;
+  }
+  /* grain papier */
+  body::before{
+    content:""; position:fixed; inset:0; z-index:9999; pointer-events:none; opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  h1,h2,h3,h4,.display{font-family:'Bricolage Grotesque',sans-serif; line-height:1.05; letter-spacing:-.02em}
+  ::selection{background:var(--or); color:var(--vert-900)}
+  ::-webkit-scrollbar{width:11px}
+  ::-webkit-scrollbar-track{background:var(--creme-2)}
+  ::-webkit-scrollbar-thumb{background:var(--vert-600); border-radius:10px; border:2px solid var(--creme-2)}
+  a{color:inherit; text-decoration:none}
+  img{display:block; max-width:100%}
+  .wrap{max-width:1240px; margin:0 auto; padding:0 24px}
+  .eyebrow{font-size:.74rem; font-weight:600; letter-spacing:.28em; text-transform:uppercase; color:var(--or)}
+  .btn{display:inline-flex; align-items:center; gap:.5rem; padding:.85rem 1.6rem; border-radius:60px; font-weight:600; font-size:.92rem; cursor:pointer; border:1.5px solid transparent; transition:.3s cubic-bezier(.16,1,.3,1)}
+  .btn-or{background:linear-gradient(135deg,var(--or-clair),var(--or)); color:var(--vert-900); box-shadow:0 8px 24px rgba(212,160,23,.3)}
+  .btn-or:hover{transform:translateY(-3px); box-shadow:0 14px 32px rgba(212,160,23,.45)}
+  .btn-ghost{border-color:rgba(255,255,255,.5); color:#fff}
+  .btn-ghost:hover{background:#fff; color:var(--vert-900); border-color:#fff}
+  .btn-dark{background:var(--vert-600); color:#fff}
+  .btn-dark:hover{background:var(--vert-800); transform:translateY(-3px)}
+
+  /* reveal */
+  .reveal{opacity:0; transform:translateY(34px); transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1)}
+  .reveal.visible{opacity:1; transform:none}
+
+  /* ===== NAV ===== */
+  nav{position:fixed; top:0; left:0; right:0; z-index:1000; transition:.35s ease;
+      background:rgba(12,46,22,.55); backdrop-filter:blur(14px); border-bottom:1px solid rgba(212,160,23,.35)}
+  nav.scrolled{background:rgba(12,46,22,.92); border-bottom-color:rgba(212,160,23,.6)}
+  .nav-in{display:flex; align-items:center; justify-content:space-between; padding:18px 24px; max-width:1240px; margin:0 auto; transition:.35s}
+  nav.scrolled .nav-in{padding:11px 24px}
+  .brand{display:flex; flex-direction:column; line-height:1}
+  .brand .wm{font-family:'Bricolage Grotesque'; font-weight:800; font-size:1.35rem; color:#fff; letter-spacing:-.02em}
+  .brand .wm b{color:var(--or)}
+  .brand .sl{font-size:.58rem; letter-spacing:.22em; text-transform:uppercase; color:var(--or-clair); margin-top:3px}
+  .nav-links{display:flex; align-items:center; gap:30px}
+  .nav-links a.lk{color:rgba(255,255,255,.88); font-size:.9rem; font-weight:500; position:relative; padding:4px 0}
+  .nav-links a.lk::after{content:""; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--or); transition:width .3s ease}
+  .nav-links a.lk:hover{color:#fff}
+  .nav-links a.lk:hover::after{width:100%}
+  .burger{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:0; padding:6px}
+  .burger span{width:26px; height:2.5px; background:#fff; border-radius:2px; transition:.3s}
+  .burger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+  .burger.open span:nth-child(2){opacity:0}
+  .burger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+
+  /* ===== HERO ===== */
+  .hero{position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden;
+        background:radial-gradient(120% 90% at 80% 10%, var(--vert-600) 0%, var(--vert-800) 42%, var(--vert-900) 100%)}
+  .hero .halo{position:absolute; width:620px; height:620px; right:-120px; top:-120px; border-radius:50%;
+        background:radial-gradient(circle, rgba(240,192,74,.4), transparent 62%); filter:blur(40px); pointer-events:none}
+  .hero .halo2{position:absolute; width:480px; height:480px; left:-160px; bottom:-160px; border-radius:50%;
+        background:radial-gradient(circle, rgba(26,92,42,.55), transparent 65%); filter:blur(50px); pointer-events:none}
+  .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:40px; align-items:center; position:relative; z-index:2; width:100%; padding-top:80px}
+  .hero-copy .eyebrow{display:inline-block; margin-bottom:18px}
+  .hero-copy .slogan{color:var(--or-clair); font-style:italic; font-size:1.05rem; margin-bottom:10px; font-family:'Poppins'}
+  .hero-copy h1{font-size:clamp(3.4rem,9vw,6.4rem); color:#fff; font-weight:800}
+  .hero-copy h1 span{color:var(--or)}
+  .hero-copy .sub{color:#fff; font-size:clamp(1.3rem,3vw,2rem); font-family:'Bricolage Grotesque'; font-weight:600; margin-top:4px}
+  .hero-copy p.desc{color:rgba(255,255,255,.82); max-width:480px; margin:22px 0 30px; font-size:1.02rem}
+  .hero-cta{display:flex; gap:14px; flex-wrap:wrap}
+  .hero-stats{display:flex; gap:34px; margin-top:44px; flex-wrap:wrap}
+  .hero-stats .st .n{font-family:'Bricolage Grotesque'; font-weight:800; font-size:2rem; color:var(--or)}
+  .hero-stats .st .l{font-size:.78rem; color:rgba(255,255,255,.7); letter-spacing:.04em}
+  .hero-visual{position:relative}
+  .hero-visual .stage{position:relative; border-radius:26px; padding:30px; background:linear-gradient(160deg, rgba(255,255,255,.1), rgba(255,255,255,.02)); border:1px solid rgba(240,192,74,.3); box-shadow:0 40px 80px rgba(0,0,0,.4); backdrop-filter:blur(4px)}
+  .hero-visual img{width:100%; border-radius:14px; filter:drop-shadow(0 24px 40px rgba(0,0,0,.45))}
+  .hero-visual .tag{position:absolute; bottom:-18px; left:24px; background:var(--or); color:var(--vert-900); font-weight:700; font-size:.82rem; padding:.6rem 1.1rem; border-radius:40px; box-shadow:0 10px 24px rgba(0,0,0,.3)}
+  .scrolldown{position:absolute; bottom:26px; left:50%; transform:translateX(-50%); z-index:3; color:rgba(255,255,255,.7); font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:8px}
+  .scrolldown i{width:1px; height:38px; background:linear-gradient(var(--or),transparent); animation:drop 1.8s infinite}
+  @keyframes drop{0%{opacity:0; transform:scaleY(.3)}50%{opacity:1}100%{opacity:0; transform:translateY(14px) scaleY(.3)}}
+
+  /* ===== TRUST BAND ===== */
+  .trust{background:var(--vert-900); padding:48px 0}
+  .trust-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:30px}
+  .trust .it{display:flex; gap:14px; align-items:flex-start}
+  .trust .ic{font-size:1.5rem}
+  .trust h4{color:#fff; font-size:1rem; margin-bottom:3px}
+  .trust p{color:rgba(255,255,255,.6); font-size:.82rem; line-height:1.5}
+
+  /* ===== SECTIONS ===== */
+  section.block{padding:96px 0}
+  .sec-head{max-width:680px; margin-bottom:54px}
+  .sec-head .eyebrow{margin-bottom:14px; display:block}
+  .sec-head h2{font-size:clamp(2.1rem,5vw,3.3rem); color:var(--vert-900); font-weight:800}
+  .sec-head p{color:#4a5a4d; margin-top:14px; font-size:1.02rem}
+
+  /* À PROPOS */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center}
+  .about-img{position:relative; border-radius:var(--rad); overflow:hidden; box-shadow:0 30px 60px rgba(12,46,22,.18)}
+  .about-img img{width:100%; height:480px; object-fit:cover}
+  .about-img .badge{position:absolute; bottom:20px; left:20px; background:var(--vert-900); color:#fff; padding:.9rem 1.3rem; border-radius:14px}
+  .about-img .badge b{font-family:'Bricolage Grotesque'; font-size:1.5rem; color:var(--or); display:block}
+  .about-img .badge span{font-size:.74rem; letter-spacing:.1em; color:rgba(255,255,255,.75)}
+  .about-txt h3{font-size:1.9rem; color:var(--vert-900); margin-bottom:16px}
+  .about-txt p{color:#4a5a4d; margin-bottom:16px}
+  .pillars{display:grid; grid-template-columns:repeat(4,1fr); gap:24px; margin-top:64px}
+  .pillar{padding:26px; border-radius:var(--rad); background:#fff; border:1px solid var(--creme-2); transition:.35s cubic-bezier(.16,1,.3,1)}
+  .pillar:hover{transform:translateY(-6px); box-shadow:0 18px 40px rgba(12,46,22,.12); border-color:var(--or)}
+  .pillar .num{font-family:'Bricolage Grotesque'; font-weight:800; color:var(--or); font-size:1.1rem; margin-bottom:10px}
+  .pillar h4{color:var(--vert-900); font-size:1.05rem; margin-bottom:6px}
+  .pillar p{color:#6b786d; font-size:.84rem; line-height:1.5}
+
+  /* PRODUITS */
+  #produits{background:var(--creme-2)}
+  .prod-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px}
+  .card{background:#fff; border-radius:var(--rad); overflow:hidden; border:1px solid #ece6d6; transition:.4s cubic-bezier(.16,1,.3,1); display:flex; flex-direction:column}
+  .card:hover{transform:translateY(-8px); box-shadow:0 28px 56px rgba(12,46,22,.16)}
+  .card .ph{position:relative; aspect-ratio:4/5; background:linear-gradient(160deg,#fff,var(--creme-2)); display:flex; align-items:center; justify-content:center; overflow:hidden}
+  .card .ph img{width:100%; height:100%; object-fit:contain; padding:14px; transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  .card:hover .ph img{transform:scale(1.06)}
+  .card .num{position:absolute; top:14px; left:16px; font-family:'Bricolage Grotesque'; font-weight:800; color:rgba(26,92,42,.3); font-size:1.6rem}
+  .card .origin{position:absolute; top:16px; right:16px; background:var(--vert-900); color:#fff; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; padding:.35rem .7rem; border-radius:30px}
+  .card .body{padding:22px 22px 26px; flex:1; display:flex; flex-direction:column}
+  .card .cat{font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; color:var(--orange); font-weight:600}
+  .card h3{font-size:1.32rem; color:var(--vert-900); margin:6px 0 2px}
+  .card .latin{font-style:italic; color:var(--or); font-size:.82rem; margin-bottom:10px; font-family:'Poppins'}
+  .card .ds{color:#6b786d; font-size:.86rem; flex:1}
+  .card .ask{margin-top:16px; font-weight:600; color:var(--vert-600); font-size:.88rem; display:inline-flex; gap:6px; transition:gap .3s}
+  .card:hover .ask{gap:12px}
+  .card-cta{background:linear-gradient(160deg,var(--vert-600),var(--vert-900)); display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:34px; color:#fff}
+  .card-cta h3{color:#fff; font-size:1.6rem; margin-bottom:10px}
+  .card-cta p{color:rgba(255,255,255,.75); font-size:.9rem; margin-bottom:22px}
+
+  /* CONDITIONNEMENT */
+  #packaging{background:var(--vert-900)}
+  #packaging .sec-head h2{color:#fff}
+  #packaging .sec-head p{color:rgba(255,255,255,.65)}
+  #packaging .sec-head .eyebrow{color:var(--or-clair)}
+  .pack-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px}
+  .pack{background:rgba(255,255,255,.04); border:1px solid rgba(240,192,74,.2); border-radius:var(--rad); overflow:hidden; transition:.4s}
+  .pack:hover{transform:translateY(-6px); border-color:var(--or)}
+  .pack .pim{aspect-ratio:1/1; background:var(--creme); display:flex; align-items:center; justify-content:center; overflow:hidden}
+  .pack .pim img{width:100%; height:100%; object-fit:contain; padding:10px}
+  .pack .pin{padding:16px}
+  .pack h4{color:#fff; font-size:.98rem}
+  .pack span{color:var(--or-clair); font-size:.78rem}
+
+  /* EXPORT / EN SITUATION */
+  .export-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center}
+  .export-txt h3{font-size:1.9rem; color:var(--vert-900); margin-bottom:16px}
+  .export-txt p{color:#4a5a4d; margin-bottom:22px}
+  .export-list{list-style:none; display:flex; flex-direction:column; gap:14px}
+  .export-list li{display:flex; gap:12px; align-items:flex-start; color:#33483a; font-size:.95rem}
+  .export-list li::before{content:"✓"; color:#fff; background:var(--vert-600); width:24px; height:24px; min-width:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.74rem; margin-top:2px}
+  .gallery{display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:14px}
+  .gallery .g{border-radius:var(--rad); overflow:hidden; box-shadow:0 18px 40px rgba(12,46,22,.16)}
+  .gallery .g img{width:100%; height:100%; object-fit:cover; transition:transform .6s}
+  .gallery .g:hover img{transform:scale(1.05)}
+  .gallery .big{grid-row:span 2}
+
+  /* PARTENAIRES */
+  #partenaires{background:var(--vert-800); padding:80px 0; overflow:hidden}
+  #partenaires .eyebrow{color:var(--or-clair); text-align:center; display:block; margin-bottom:34px}
+  .marquee{display:flex; overflow:hidden; mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+  .marquee-track{display:flex; gap:54px; padding-right:54px; white-space:nowrap; animation:scroll 32s linear infinite}
+  #partenaires:hover .marquee-track{animation-play-state:paused}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+  .marquee a{display:inline-flex; flex-direction:column; line-height:1.2}
+  .marquee a b{font-family:'Bricolage Grotesque'; font-weight:700; font-size:1.5rem; color:rgba(255,255,255,.9); transition:color .3s}
+  .marquee a:hover b{color:var(--or)}
+  .marquee a span{font-size:.72rem; color:var(--or-clair); letter-spacing:.1em}
+
+  /* CONTACT */
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px}
+  .info-item{display:flex; gap:14px; margin-bottom:24px}
+  .info-item .ic{font-size:1.3rem; min-width:28px}
+  .info-item h4{color:var(--vert-900); font-size:.95rem; margin-bottom:2px}
+  .info-item p, .info-item a{color:#4a5a4d; font-size:.92rem; line-height:1.6}
+  .info-item a:hover{color:var(--vert-600)}
+  .map-box{border-radius:var(--rad); overflow:hidden; box-shadow:0 18px 40px rgba(12,46,22,.14); margin-top:14px}
+  .map-box iframe{width:100%; height:220px; border:0; display:block}
+  .form-card{background:#fff; border:1px solid var(--creme-2); border-radius:var(--rad); padding:34px; box-shadow:0 20px 50px rgba(12,46,22,.1)}
+  .form-card h3{color:var(--vert-900); font-size:1.5rem; margin-bottom:6px}
+  .form-card .fp{color:#6b786d; font-size:.88rem; margin-bottom:22px}
+  .fld{margin-bottom:16px}
+  .fld label{display:block; font-size:.78rem; font-weight:600; color:var(--vert-800); margin-bottom:6px; letter-spacing:.02em}
+  .fld input, .fld select, .fld textarea{width:100%; padding:.8rem 1rem; border:1.5px solid #e4ddcd; border-radius:12px; font-family:'Poppins'; font-size:.92rem; background:var(--creme); transition:.25s}
+  .fld input:focus, .fld select:focus, .fld textarea:focus{outline:none; border-color:var(--vert-600); background:#fff}
+  .fld textarea{resize:vertical; min-height:96px}
+  .form-msg{margin-top:14px; padding:12px 16px; border-radius:12px; background:rgba(26,92,42,.1); color:var(--vert-600); font-size:.88rem; display:none}
+  .form-msg.show{display:block}
+
+  /* FOOTER */
+  footer{position:relative; background:var(--vert-900); color:#fff; overflow:hidden}
+  footer .fbg{position:absolute; inset:0; z-index:0}
+  footer .fbg img{width:100%; height:100%; object-fit:cover; opacity:.18}
+  footer .fov{position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(12,46,22,.85), rgba(12,46,22,.97))}
+  .footer-in{position:relative; z-index:2; padding:72px 0 0}
+  .footer-grid{display:grid; grid-template-columns:1.6fr 1fr 1fr 1.2fr; gap:40px}
+  .footer-grid .fcol h4{font-size:.82rem; letter-spacing:.16em; text-transform:uppercase; color:var(--or); margin-bottom:18px}
+  .footer-grid .fcol a, .footer-grid .fcol p{color:rgba(255,255,255,.72); font-size:.9rem; line-height:2; display:block}
+  .footer-grid .fcol a:hover{color:#fff}
+  .footer-brand .wm{font-family:'Bricolage Grotesque'; font-weight:800; font-size:1.7rem}
+  .footer-brand .wm b{color:var(--or)}
+  .footer-brand .sl{color:var(--or-clair); font-style:italic; margin:8px 0 14px}
+  .footer-brand p{color:rgba(255,255,255,.6); font-size:.88rem; max-width:320px}
+  .footer-bar{position:relative; z-index:2; margin-top:56px; border-top:1px solid rgba(255,255,255,.12); padding:22px 0; text-align:center; color:rgba(255,255,255,.5); font-size:.82rem}
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:1024px){
+    .hero-grid{grid-template-columns:1fr; gap:48px}
+    .hero-visual{max-width:420px}
+    .trust-grid{grid-template-columns:repeat(2,1fr)}
+    .pillars{grid-template-columns:repeat(2,1fr)}
+    .pack-grid{grid-template-columns:repeat(2,1fr)}
+    .prod-grid{grid-template-columns:repeat(2,1fr)}
+    .footer-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:760px){
+    .nav-links{position:fixed; top:0; right:-100%; height:100vh; width:78%; max-width:320px; background:var(--vert-900); flex-direction:column; justify-content:center; align-items:flex-start; padding:40px; gap:24px; transition:right .4s cubic-bezier(.16,1,.3,1); box-shadow:-20px 0 60px rgba(0,0,0,.4)}
+    .nav-links.open{right:0}
+    .nav-links a.lk{font-size:1.2rem}
+    .burger{display:flex; z-index:1100}
+    section.block{padding:68px 0}
+    .about-grid, .export-grid, .contact-grid{grid-template-columns:1fr; gap:36px}
+    .about-img img{height:340px}
+    .pillars, .trust-grid, .prod-grid, .pack-grid{grid-template-columns:1fr}
+    .footer-grid{grid-template-columns:1fr}
+    .hero-stats{gap:24px}
+    .gallery{grid-template-columns:1fr 1fr}
+    .gallery .big{grid-row:span 1}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-in">
+    <a href="#top" class="brand">
+      <span class="wm">BEST <b>FOODS</b></span>
+      <span class="sl">La Qualité au Bon Prix</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a class="lk" href="#apropos">À Propos</a>
+      <a class="lk" href="#produits">Produits</a>
+      <a class="lk" href="#export">Export</a>
+      <a class="lk" href="#partenaires">Partenaires</a>
+      <a class="lk" href="#contact">Contact</a>
+      <a class="btn btn-or" href="#contact">Demander un Devis</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <span class="halo"></span><span class="halo2"></span>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow anim" style="animation-delay:.05s">Import · Export · Négoce</span>
+      <div class="slogan anim" style="animation-delay:.15s">« La Qualité au Bon Prix »</div>
+      <h1 class="anim" style="animation-delay:.25s">BEST <span>FOODS</span></h1>
+      <div class="sub anim" style="animation-delay:.35s">Épices &amp; Produits Alimentaires</div>
+      <p class="desc anim" style="animation-delay:.45s">Sourcing direct, contrôle qualité et logistique export depuis Dakar. Nous approvisionnons grossistes, traiteurs et industriels avec des produits fiables, certifiés et compétitifs.</p>
+      <div class="hero-cta anim" style="animation-delay:.55s">
+        <a href="#produits" class="btn btn-or">Voir nos produits</a>
+        <a href="#contact" class="btn btn-ghost">Nous contacter</a>
+      </div>
+      <div class="hero-stats anim" style="animation-delay:.65s">
+        <div class="st"><div class="n">20+</div><div class="l">Pays sourcés</div></div>
+        <div class="st"><div class="n">100%</div><div class="l">Qualité contrôlée</div></div>
+        <div class="st"><div class="n">8+</div><div class="l">Produits phares</div></div>
+      </div>
+    </div>
+    <div class="hero-visual anim" style="animation-delay:.5s">
+      <div class="stage">
+        <img src="./uploads/cafe.jpg" alt="Sac de Café Kenya 50kg — Best Foods">
+        <span class="tag">Café Kenya · 50 kg</span>
+      </div>
+    </div>
+  </div>
+  <div class="scrolldown"><span>Défiler</span><i></i></div>
+</header>
+
+<!-- TRUST -->
+<section class="trust">
+  <div class="wrap trust-grid">
+    <div class="it reveal"><div class="ic">🏅</div><div><h4>Qualité Certifiée</h4><p>Contrôle à la source et à l'arrivée.</p></div></div>
+    <div class="it reveal" style="transition-delay:.1s"><div class="ic">🌍</div><div><h4>20+ Pays</h4><p>Un réseau de partenaires mondial.</p></div></div>
+    <div class="it reveal" style="transition-delay:.2s"><div class="ic">🚢</div><div><h4>Livraison Fiable</h4><p>Suivi export de bout en bout.</p></div></div>
+    <div class="it reveal" style="transition-delay:.3s"><div class="ic">💰</div><div><h4>Prix Compétitifs</h4><p>Circuit court, marges optimisées.</p></div></div>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<section class="block" id="apropos">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-img reveal">
+        <img src="./uploads/ad-poivre-noir.png" alt="Réserve d'épices Best Foods pour professionnels">
+        <div class="badge"><b>10K+</b><span>Tonnes / an</span></div>
+      </div>
+      <div class="about-txt reveal" style="transition-delay:.15s">
+        <span class="eyebrow">À Propos</span>
+        <h3>Spécialistes des épices &amp; produits alimentaires</h3>
+        <p>Basés à Dakar, nous importons et exportons des épices, légumineuses et grains de qualité depuis les meilleures origines mondiales. Notre métier : sécuriser un approvisionnement constant pour les professionnels du Sénégal et de la sous-région.</p>
+        <p>De la sélection à la livraison, chaque lot est tracé et contrôlé. Notre promesse tient en une phrase : la qualité, au bon prix.</p>
+        <a href="#contact" class="btn btn-dark">Travailler avec nous</a>
+      </div>
+    </div>
+    <div class="pillars">
+      <div class="pillar reveal"><div class="num">01</div><h4>Sourcing Direct</h4><p>Relations directes avec producteurs et coopératives.</p></div>
+      <div class="pillar reveal" style="transition-delay:.1s"><div class="num">02</div><h4>Contrôle Qualité</h4><p>Inspection à la source et avant expédition.</p></div>
+      <div class="pillar reveal" style="transition-delay:.2s"><div class="num">03</div><h4>Logistique</h4><p>FCL / LCL, documents export, suivi complet.</p></div>
+      <div class="pillar reveal" style="transition-delay:.3s"><div class="num">04</div><h4>Sur Mesure</h4><p>Volumes et conditionnements adaptés à vos besoins.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUITS -->
+<section class="block" id="produits">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Notre Catalogue</span>
+      <h2>Des produits fiables, prêts à l'export</h2>
+      <p>Une sélection d'épices, légumineuses et grains conditionnés pour les professionnels. Demandez un prix pour chaque référence.</p>
+    </div>
+    <div class="prod-grid">
+
+      <article class="card reveal">
+        <div class="ph"><span class="num">01</span><span class="origin">Brésil</span><img src="./uploads/poivre-noir.jpg" alt="Poivre Noir — sac 25 kg"></div>
+        <div class="body">
+          <span class="cat">Épices</span><h3>Poivre Noir</h3><span class="latin">Piper nigrum</span>
+          <p class="ds">Grains entiers, arôme puissant et régulier. Sac de 25 kg pour usage professionnel.</p>
+          <a href="#contact" class="ask">Demander un prix →</a>
+        </div>
+      </article>
+
+      <article class="card reveal" style="transition-delay:.08s">
+        <div class="ph"><span class="num">02</span><span class="origin">Inde</span><img src="./uploads/piment-rouge.jpg" alt="Piment Rouge — sac 10 kg"></div>
+        <div class="body">
+          <span class="cat">Épices</span><h3>Piment Rouge</h3><span class="latin">Capsicum annuum</span>
+          <p class="ds">Puissance aromatique constante pour vos recettes signatures. Sac de 10 kg certifié.</p>
+          <a href="#contact" class="ask">Demander un prix →</a>
+        </div>
+      </article>
+
+      <article class="card reveal" style="transition-delay:.16s">
+        <div class="ph"><span class="num">03</span><span class="origin">Inde</span><img src="./uploads/tamarin.jpg" alt="Tamarin Premium — carton 10 kg"></div>
+        <div class="body">
+          <span class="cat">Fruits &amp; Concentrés</span><h3>Tamarin Premium</h3><span class="latin">Tamarindus indica</span>
+          <p class="ds">Tamarin naturel haute qualité, carton de 10 kg. Idéal sauces, boissons et pâtisserie.</p>
+          <a href="#contact" class="ask">Demander un prix →</a>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="ph"><span class="num">04</span><span class="origin">Kenya</span><img src="./uploads/cafe.jpg" alt="Café Vert Kenya — sac jute 50 kg"></div>
+        <div class="body">
+          <span class="cat">Grains &amp; Café</span><h3>Café Vert</h3><span class="latin">Coffea arabica</span>
+          <p class="ds">Café vert d'altitude en sac jute de 50 kg. Sourcing direct pour torréfacteurs et négoces.</p>
+          <a href="#contact" class="ask">Demander un prix →</a>
+        </div>
+      </article>
+
+      <article class="card reveal" style="transition-delay:.08s">
+        <div class="ph"><span class="num">05</span><span class="origin">Argentine</span><img src="./uploads/petits-pois.jpg" alt="Petits Pois — sac 20 kg"></div>
+        <div class="body">
+          <span class="cat">Légumineuses</span><h3>Petits Pois</h3><span class="latin">Pisum sativum</span>
+          <p class="ds">Sourcing direct en 20 kg. Fraîcheur et fiabilité garanties pour tous les traiteurs.</p>
+          <a href="#contact" class="ask">Demander un prix →</a>
+        </div>
+      </article>
+
+      <article class="card card-cta reveal" style="transition-delay:.16s">
+        <h3>Besoin d'une autre référence ?</h3>
+        <p>Lentilles, clous de girofle, noix de muscade et plus encore. Demandez notre catalogue complet et nos tarifs grossistes.</p>
+        <a href="#contact" class="btn btn-or">Demander le catalogue</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONDITIONNEMENT -->
+<section class="block" id="packaging">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Conditionnement</span>
+      <h2>Des emballages pensés pour les pros</h2>
+      <p>Sacs tissés, jute et sachets — robustes, traçables et marqués Best Foods.</p>
+    </div>
+    <div class="pack-grid">
+      <div class="pack reveal"><div class="pim"><img src="./uploads/poivre-noir.jpg" alt="Sac Poivre Noir 25 kg"></div><div class="pin"><h4>Poivre Noir</h4><span>Sac tissé · 25 kg</span></div></div>
+      <div class="pack reveal" style="transition-delay:.1s"><div class="pim"><img src="./uploads/piment-rouge.jpg" alt="Sac Piment Rouge 10 kg"></div><div class="pin"><h4>Piment Rouge</h4><span>Sac tissé · 10 kg</span></div></div>
+      <div class="pack reveal" style="transition-delay:.2s"><div class="pim"><img src="./uploads/cafe-3sacs.jpg" alt="Sacs jute Café Kenya 50 kg"></div><div class="pin"><h4>Café Kenya</h4><span>Sac jute · 50 kg</span></div></div>
+      <div class="pack reveal" style="transition-delay:.3s"><div class="pim"><img src="./uploads/sachet-bestfoods.jpg" alt="Sachet Best Foods"></div><div class="pin"><h4>Sachet Best Foods</h4><span>Conditionnement spécial</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPORT -->
+<section class="block" id="export">
+  <div class="wrap">
+    <div class="export-grid">
+      <div class="export-txt reveal">
+        <span class="eyebrow">Export &amp; Logistique</span>
+        <h3>Du conteneur à votre marché</h3>
+        <p>Nous gérons l'ensemble de la chaîne logistique pour livrer vos commandes dans les meilleures conditions, partout dans la sous-région et au-delà.</p>
+        <ul class="export-list">
+          <li>Expéditions FCL &amp; LCL selon vos volumes</li>
+          <li>Documents d'export complets et conformes</li>
+          <li>Suivi bout-en-bout jusqu'à destination</li>
+          <li>Volumes flexibles, du palette au conteneur</li>
+        </ul>
+      </div>
+      <div class="gallery reveal" style="transition-delay:.15s">
+        <div class="g big"><img src="./uploads/ad-piment-rouge.png" alt="Piment Rouge en entrepôt"></div>
+        <div class="g"><img src="./uploads/ad-cafe.png" alt="Café Best Foods en situation"></div>
+        <div class="g"><img src="./uploads/ad-petits-pois.png" alt="Petits Pois pour traiteurs"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTENAIRES -->
+<section id="partenaires">
+  <span class="eyebrow">Nos Partenaires &amp; Fournisseurs</span>
+  <div class="marquee">
+    <div class="marquee-track" id="track">
+      <a href="#"><b>Ekrem Agro</b><span>Turquie</span></a>
+      <a href="#"><b>Copa Café</b><span>Brésil</span></a>
+      <a href="#"><b>Agrospice</b><span>Brésil</span></a>
+      <a href="#"><b>Kore Intl.</b><span>Inde</span></a>
+      <a href="#"><b>Hanfimex</b><span>Vietnam</span></a>
+      <a href="#"><b>EKN</b><span>Suède</span></a>
+      <a href="#"><b>Timbro</b><span>International</span></a>
+      <a href="#"><b>Central National</b><span>International</span></a>
+      <a href="#"><b>Grancafé</b><span>Brésil</span></a>
+      <a href="#"><b>Trois Conti</b><span>Malaisie</span></a>
+      <a href="#"><b>Alicampo</b><span>International</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Contact</span>
+      <h2>Demandez votre devis</h2>
+      <p>Une question, un volume, un prix ? Notre équipe vous répond rapidement.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="info-item"><div class="ic">✉️</div><div><h4>Email</h4><a href="mailto:bestfoodsgroup25@gmail.com">bestfoodsgroup25@gmail.com</a></div></div>
+        <div class="info-item"><div class="ic">📞</div><div><h4>Téléphone</h4>
+          <a href="tel:+221776990000">+221 77 699 00 00</a><br>
+          <a href="tel:+221772674747">+221 77 267 47 47</a><br>
+          <a href="tel:+221773360000">+221 77 336 00 00</a></div></div>
+        <div class="info-item"><div class="ic">📍</div><div><h4>Localisation</h4><p>Dakar · Hann Mariste<br>En face de Coris Bank</p></div></div>
+        <div class="map-box">
+          <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Hann+Mariste+Dakar+Coris+Bank&output=embed"></iframe>
+        </div>
+      </div>
+      <div class="form-card reveal" style="transition-delay:.15s">
+        <h3>Demande de Devis</h3>
+        <p class="fp">Remplissez le formulaire, votre client mail s'ouvrira pré-rempli.</p>
+        <div class="fld"><label>Nom complet</label><input type="text" id="f-nom" placeholder="Votre nom"></div>
+        <div class="fld"><label>Email</label><input type="email" id="f-email" placeholder="vous@exemple.com"></div>
+        <div class="fld"><label>Produit</label>
+          <select id="f-prod">
+            <option value="">Sélectionnez un produit…</option>
+            <option>Poivre Noir</option>
+            <option>Piment Rouge</option>
+            <option>Tamarin Premium</option>
+            <option>Café Vert Kenya</option>
+            <option>Petits Pois</option>
+            <option>Autre / Catalogue complet</option>
+          </select>
+        </div>
+        <div class="fld"><label>Message</label><textarea id="f-msg" placeholder="Quantité, destination, délai…"></textarea></div>
+        <button class="btn btn-dark" onclick="envoyerMail()">Envoyer la demande</button>
+        <div class="form-msg" id="formMsg">✅ Merci ! Votre client mail s'ouvre avec la demande pré-remplie.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fbg"><img src="./uploads/ad-cafe.png" alt=""></div>
+  <div class="fov"></div>
+  <div class="wrap footer-in">
+    <div class="footer-grid">
+      <div class="fcol footer-brand">
+        <div class="wm">BEST <b>FOODS</b></div>
+        <div class="sl">« La Qualité au Bon Prix »</div>
+        <p>Import-export d'épices et produits alimentaires basé à Dakar, Sénégal. Au service des professionnels.</p>
+      </div>
+      <div class="fcol"><h4>Navigation</h4>
+        <a href="#apropos">À Propos</a><a href="#produits">Produits</a><a href="#export">Export</a><a href="#partenaires">Partenaires</a><a href="#contact">Contact</a></div>
+      <div class="fcol"><h4>Produits</h4>
+        <a href="#produits">Poivre Noir</a><a href="#produits">Piment Rouge</a><a href="#produits">Tamarin</a><a href="#produits">Café Kenya</a><a href="#produits">Petits Pois</a></div>
+      <div class="fcol"><h4>Contact</h4>
+        <a href="mailto:bestfoodsgroup25@gmail.com">bestfoodsgroup25@gmail.com</a>
+        <a href="tel:+221776990000">+221 77 699 00 00</a>
+        <p>Dakar · Hann Mariste<br>En face de Coris Bank</p></div>
+    </div>
+  </div>
+  <div class="footer-bar">© 2026 BEST FOODS — Tous droits réservés.</div>
+</footer>
+
+<script>
+  // NAV scrolled
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', ()=> nav.classList.toggle('scrolled', window.scrollY > 70));
+
+  // Burger
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', ()=>{ burger.classList.toggle('open'); navLinks.classList.toggle('open'); });
+  navLinks.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=>{ burger.classList.remove('open'); navLinks.classList.remove('open'); }));
+
+  // Hero staggered entrance
+  document.querySelectorAll('.anim').forEach(el=>{
+    el.style.opacity = 0; el.style.transform = 'translateY(26px)';
+    const d = parseFloat(el.style.animationDelay)||0;
+    setTimeout(()=>{ el.style.transition='opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1)'; el.style.opacity=1; el.style.transform='none'; }, d*1000 + 120);
+  });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, {threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+  // Parallax hero
+  const halo = document.querySelector('.hero .halo');
+  const visual = document.querySelector('.hero-visual');
+  window.addEventListener('scroll', ()=>{
+    const y = window.scrollY;
+    if(y < window.innerHeight){
+      if(halo) halo.style.transform = `translateY(${y*0.25}px)`;
+      if(visual) visual.style.transform = `translateY(${y*0.08}px)`;
+    }
+  });
+
+  // Marquee duplication (boucle fluide)
+  const track = document.getElementById('track');
+  track.innerHTML += track.innerHTML;
+
+  // Formulaire -> mailto
+  function envoyerMail(){
+    const nom = document.getElementById('f-nom').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    const prod = document.getElementById('f-prod').value;
+    const msg = document.getElementById('f-msg').value.trim();
+    if(!nom || !email || !prod){
+      alert('Merci de renseigner votre nom, votre email et le produit souhaité.');
+      return;
+    }
+    const sujet = `Demande de devis — ${prod}`;
+    const corps =
+`Bonjour Best Foods,
+
+Nom : ${nom}
+Email : ${email}
+Produit : ${prod}
+
+Message :
+${msg || '(aucun)'}
+
+Cordialement,
+${nom}`;
+    window.location.href = `mailto:bestfoodsgroup25@gmail.com?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`;
+    document.getElementById('formMsg').classList.add('show');
+  }
+</script>
+</body>
+</html>
